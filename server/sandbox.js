@@ -4,7 +4,7 @@ const fs = require('fs'); //to export data
 const DENZEL_IMDB_ID = 'nm0000243';
 const METASCORE = 77;
 
-async function start (actor = DENZEL_IMDB_ID, metascore = METASCORE) {
+module.exports =async function start (actor = DENZEL_IMDB_ID, metascore = METASCORE) {
   try {
     console.log(`📽️  fetching filmography of ${actor}...`);
     const movies = await imdb(actor);
@@ -12,18 +12,21 @@ async function start (actor = DENZEL_IMDB_ID, metascore = METASCORE) {
 
     console.log(`🍿 ${movies.length} movies found.`);
     //console.log(JSON.stringify(movies, null, 2));
+    /*
     // export in JSON
     fs.writeFileSync('../data/movies.json', JSON.stringify(movies,null,2), (err) => {
         if (err) throw err;
         console.log('Data (movies) written to file');
-    });
+    });*/
     console.log(`🥇 ${awesome.length} awesome movies found.`);
     // console.log(JSON.stringify(awesome, null, 2));
+    /*
     // export in JSON
     fs.writeFileSync('../data/awesome.json', JSON.stringify(awesome,null,2), (err) => {
         if (err) throw err;
         console.log('Data (awesome movies) written to file');
-    });
+    });*/
+    return{movies,awesome};
     process.exit(0);
   } catch (e) {
     console.error(e);
@@ -34,4 +37,7 @@ async function start (actor = DENZEL_IMDB_ID, metascore = METASCORE) {
 
 const [, , id, metascore] = process.argv;
 
-start(id, metascore);
+// start(id, metascore);
+
+// exports.start=start
+

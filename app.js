@@ -13,6 +13,7 @@ const {PORT} = require('./server/constants');
 const CONNECTION_URL = "mongodb+srv://user:user@cluster0-mnlus.mongodb.net/test?retryWrites=true&w=majority";
 
 const DATABASE_NAME = "denzel_database";
+const METASCORE = 77;
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.listen(PORT, () => {
         }
         database = client.db(DATABASE_NAME);
         collection_movie = database.collection("denzel_movies");
-        collection_awesome = database.collection("denzel_awesome_movies");
+        //collection_awesome = database.collection("denzel_awesome_movies");
         collection_review = database.collection("denzel_reviews");
         console.log("Connected to databse named `" + DATABASE_NAME + "`!");
     });
@@ -53,13 +54,15 @@ app.get("/movies/all", (request, response) => { //Request to get all denzel movi
 
 
 // Populate the database with all the movies from IMDb from actor with a specific id
-app.get("/movies/populate/:id", async (request, response) => {
+app.get("/movies/populate/:id", async (request, response) => { //takes approximatively 20 secondes
     try {
 	    //const result = await sandbox.start(request.params.id,77) ;
 		// const result = await sandbox(start(request.params.id,77));
 		actor = await request.params.id;
 		console.log(actor);
 		const movies = await imdb(actor);
+        //const awesome = movies.filter(movie => movie.metascore >= METASCORE);
+        
 		// console.log(movies);
         collection_movie.deleteMany({}); //first we delete all the elements of the collection
 	    collection_movie.insertMany(movies, (error, result) => { 
@@ -67,25 +70,26 @@ app.get("/movies/populate/:id", async (request, response) => {
 	            return response.status(500).send(error);
 	        }
 	        // response.send(result.ops);
-            response.send({'total':result.ops.length});
+            response.send({'total movies:':result.ops.length});
 	    });
         /*
         collection_awesome.deleteMany({});
-        collection_awesome.insertMany(movies, (error, result) => { 
+        collection_awesome.insertMany(awesome, (error, result) => { 
             if(error) {
                 return response.status(500).send(error);
             }
             // response.send(result.ops);
-            response.send({'total':result.ops.length});
+            response.send({'total awesome movies:':result.ops.length});
         });*/
   } catch (error) {
     console.log(error)
   }
 });
 
+
 // Fetch a random must-watch movie
 app.get("/movies", (request, response) => {
-    collection_awesome.find({}).toArray((error, result) => {
+    collection_movie.find({"metascore" : {$gt:METASCORE}}).toArray((error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
@@ -132,9 +136,12 @@ app.post("/movies/:id", (request, response) => {
         if(error) {
             return response.status(500).send(error);
         }*/
-        var myquery = { "_id": new ObjectId(movie_id) };
-        var newvalues = { $set: {date: date_, review: review_ } };
-        collection_movie.update(myquery, data, { upsert: true } ,(error, result) => {
+        //var myquery = { "_id": new ObjectId(movie_id) };
+        var myquery = { "id": movie_id };
+        var newvalues1 = { $set: {date: date_, review: review_ },  $setOnInsert: {date: date_, review: review_ }};
+        var newvalues = { $set: {date: date_, review: review_ }};
+        //collection_movie.update(myquery, data, { upsert: true } ,(error, result) => {
+        collection_movie.update(myquery, newvalues, { upsert: true } ,(error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
@@ -151,16 +158,11 @@ app.post("/movies/:id", (request, response) => {
 
 //Fetch a specific movie
 app.get("/movies/:id", (request, response) => {
-	var obj_id=request.params.id.toString();
-    //var obj_id="\""+request.params.id.toString()+"\"";
-    //collection_movie.findOne({ "_id": new ObjectId(obj_id) }, (error, result) => {
-    //var mongo = require('mongodb');
-    //var o_id = new mongo.ObjectID(obj_id);
-    //var o_id = new ObjectID("5e7655f1bc0288ac954f21a4");
-    //var o_id = new ObjectID(obj_id);
-    //console.log('id: ' + o_id + ' type: ' + typeof o_id);
-    //collection_movie.findOne({ "_id": o_id }, (error, result) => {
-    collection_movie.findOne({ "_id": new ObjectId(obj_id) }, (error, result) => {
+	var movie_id=request.params.id.toString();
+    //var myquery = { "_id": new ObjectId(movie_id) };
+    var myquery = { "id": movie_id };
+    // collection_movie.findOne({ "_id": new ObjectId(obj_id) }, (error, result) => {
+    collection_movie.findOne(myquery, (error, result) => {
         if(error) {
             return response.status(500).send(error);
         }

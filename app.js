@@ -9,11 +9,14 @@ const express = require('express');
 const helmet = require('helmet');
 const {PORT} = require('./server/constants');
 
+
 const CONNECTION_URL = "mongodb+srv://user:user@cluster0-mnlus.mongodb.net/test?retryWrites=true&w=majority";
 
 const DATABASE_NAME = "denzel_database";
 
 const app = express();
+
+app.use(cors({origin: 'http://localhost:9292'}));
 
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
@@ -119,15 +122,23 @@ app.get("/movies/search", (request, response) => {
 //Save a watched date and a review.
 app.post("/movies/:id", (request, response) => {
      try {
-        let date= request.query.date || null;
-        let review= request.query.review || null;
+        let date_= request.query.date || null;
+        let review_= request.query.review || null;
         var movie_id=request.params.id.toString();
-        var data= {movie_id,date,review};
+        var data= {movie_id,date_,review_};
         console.log(data);
+        /*
         collection_review.insertOne(data, (error, result) => {
         if(error) {
             return response.status(500).send(error);
+        }*/
+        var myquery = { "_id": new ObjectId(movie_id) };
+        var newvalues = { $set: {date: date_, review: review_ } };
+        collection_movie.update(myquery, data, { upsert: true } ,(error, result) => {
+        if(error) {
+            return response.status(500).send(error);
         }
+
         response.send(data);
     });
   } catch (error) {
@@ -159,9 +170,24 @@ app.get("/movies/:id", (request, response) => {
 
 
 
+// -------------------- GRAPHQL -----------------------
 
 
+//add librairies
+const graphqlHTTP = require('express-graphql');
+const {GraphQLSchema} = require('graphql');
+const {Query} = require('./query.js');
+const Mongoose = require("mongoose");
 
+
+ // Define the Schema
+const schema = new GraphQLSchema({ query: Query });
+
+//Setup the nodejs GraphQL server
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+}));
 
 
 

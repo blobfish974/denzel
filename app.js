@@ -37,7 +37,6 @@ app.listen(PORT, () => {
         database = client.db(DATABASE_NAME);
         collection_movie = database.collection("denzel_movies");
         //collection_awesome = database.collection("denzel_awesome_movies");
-        collection_review = database.collection("denzel_reviews");
         console.log("Connected to databse named `" + DATABASE_NAME + "`!");
     });
 });

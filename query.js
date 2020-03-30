@@ -1,6 +1,7 @@
 const { GraphQLObjectType,
     GraphQLString,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLList
 } = require('graphql');
 const {movieType} = require('./type.js');
 
@@ -16,23 +17,13 @@ const Query = new GraphQLObjectType({
                 return "Hello World";
             }
         },
-        movie: {
-            type: movieType,
-            args: {
-                id: { type: GraphQLInt }
-                // id: { type: GraphQLNonNull(GraphQLID) }
-            },
-            resolve: function (source, args) {
-                return _.find(movies, { id: args.id });
-            }
-        },
         movies: {
-            type: movieType,
-            args: {
-                id: { type: GraphQLInt }
-            },
-            resolve: function (source, args) {
-                return _.find(movies, { id: args.id });
+            type: new GraphQLList(movieType),
+            //type: [movieType],
+            resolve: function (source, args){
+                //return collection_movie.find({});
+                //return [collection_movie.find({})];
+                return collection_movie.find({}).toArray();
             }
         }
     }

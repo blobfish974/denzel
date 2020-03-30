@@ -34,25 +34,58 @@ var database, collection;
 
 //add librairies
 const graphqlHTTP = require('express-graphql');
-const {GraphQLSchema} = require('graphql');
 const {Query} = require('./query.js');
-const Mongoose = require("mongoose");
+const {movieType} = require('./type.js');
+
+const {
+    GraphQLSchema,
+    GraphQLObjectType,
+    GraphQLID,
+    GraphQLString,
+    GraphQLInt,
+    buildSchema
+} = require('graphql');
+
 
 
  // Define the Schema
+const movieSchema = new GraphQLSchema({
+    link: String,
+    id: String,
+    metascore: Number,
+    poster: String,
+    rating: Number,
+    synopsis: String,
+    title: String,
+    votes: Number, 
+    year: Number
+
+});
+
+
 const schema = new GraphQLSchema({ query: Query });
 
-//Setup the nodejs GraphQL server
+
+
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     graphiql: true,
 }));
 
 
-app.listen(port);
-console.log(`📡 Graphql running on port ${PORT}`);
 
-
+app.listen(PORT, () => {
+    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
+        if(error) {
+            throw error;
+        }
+        database = client.db(DATABASE_NAME);
+        collection_movie = database.collection("denzel_movies");
+        //collection_awesome = database.collection("denzel_awesome_movies");
+        console.log("Connected to databse named `" + DATABASE_NAME + "`!");
+        console.log(`📡 Graphql running on port ${PORT}`);
+    });
+});
 
 
 

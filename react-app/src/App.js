@@ -29,7 +29,7 @@ class App extends Component{
       return  <p className="review">review: {this.state.json.review}</p>
     }
     else{
-      return <p className="review"> no review available</p>
+      return <p className="review"> (sorry no review available)</p>
     }
   }
 
@@ -37,13 +37,20 @@ class App extends Component{
   render() {
     return (
       <div className="App">
-        <p className="title">title: {this.state.json.title} </p>
-        <p className="synopsis">synopsis: {this.state.json.synopsis} </p>
+        <p className="title">{this.state.json.title} </p>
         
-        <img src={this.state.json.poster}></img>
-        <p> {this.renderMovieReview()}</p>
-        <a href={this.state.json.link}>IMDb record</a>
+        <img align="left" src={this.state.json.poster} className="image"></img>
 
+        <p className="synopsis-title"> Synopsis: </p>
+
+        <p className="synopsis">{this.state.json.synopsis} </p>
+
+        <p className="review"> {this.renderMovieReview()}</p>
+
+        <div className="link">
+          <a>Link to IMDb:&nbsp;&nbsp;</a>
+            <a href={this.state.json.link} >IMDb record</a>
+        </div>
       </div>
     );
 

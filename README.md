@@ -2,22 +2,34 @@
 
 > The must-watch Denzel's movies
 
-To run my programm simply run nodeamon app.js
 
-To start React App run:
-cd react-app
-npm start 
+## Launch the application
+
+To launch the server and the api endpoints run 
+
+```sh
+❯ node app.js
+```
+
+Then, if you want to start the React App run:
+
+```sh
+❯ cd react-app
+❯ npm start 
+```
 
 
-Development information:
 
-I first modified the sandbox file to store the datas in 2 json files inside data repository when running it.
+## Information on how i developped the app
 
 At the beginning I had 2 collections (one for all movies and one for awesome ones) but one is enough!
+I created a mongoDB atlas database which means you can have issue requesting the API (as mongoDB atlas only give access to specified IP adresses).
 
 
+If you want commands to see some usefull commands used for developping see the commands.txt file.
 
-Global readme is:
+
+## Original readme is:
 
 ![denzel](https://m.media-amazon.com/images/M/MV5BMjE5NDU2Mzc3MV5BMl5BanBnXkFtZTcwNjAwNTE5OQ@@._V1_SY1000_SX750_AL_.jpg)
 

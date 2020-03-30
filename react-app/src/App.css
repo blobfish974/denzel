@@ -1,10 +1,67 @@
 .title{
   text-align: center;
-  color:;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 55px;
+  letter-spacing: 1.2px;
+  word-spacing: 1.2px;
+  color: white;
+  font-weight: 550;
+  text-decoration: none solid rgb(68, 68, 68);
+  text-transform: uppercase;
+  padding-bottom: 2%;
 }
+.image {
+  width: 30%;
+  height: auto;
+  padding-left: 10%;
+  padding-bottom: 5%;
+}
+.synopsis-title {
+  text-align: left;
+  padding-top: 5%;
+  padding-left: 50%;
+  font-size: 25px;
+}
+
+.synopsis {
+  text-align: left;
+  padding-top: 3%;
+  padding-left: 50%;
+  padding-right: 10%;
+  font-size: 22px;
+}
+
+.review {
+  text-align: left;
+  padding-left: 30%;
+  padding-top: 7%;
+}
+
+.link {
+  text-align: left;
+  position: relative; 
+  top: 20px; 
+  left: 11%; 
+}
+
 
 .App {
   text-align: center;
+  color: #e9ebf5;
+}
+a:link, a:visited {
+  background-color: #b89b0f;
+  color: black;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 15px;
+}
+
+body {
+  background-color: #323338;
+  background-color: #171717;
 }
 
 .App-logo {

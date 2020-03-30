@@ -172,31 +172,6 @@ app.get("/movies/:id", (request, response) => {
 
 
 
-// -------------------- GRAPHQL -----------------------
-
-
-//add librairies
-const graphqlHTTP = require('express-graphql');
-const {GraphQLSchema} = require('graphql');
-const {Query} = require('./query.js');
-const Mongoose = require("mongoose");
-
-
- // Define the Schema
-const schema = new GraphQLSchema({ query: Query });
-
-//Setup the nodejs GraphQL server
-app.use('/graphql', graphqlHTTP({
-    schema: schema,
-    graphiql: true,
-}));
-
-
-
-console.log(`📡 Running on port ${PORT}`);
-
-
-
 
 
 

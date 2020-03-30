@@ -37,11 +37,10 @@ class App extends Component{
   render() {
     return (
       <div className="App">
-        <p className="title">{this.state.json.title} </p>
         
         <img align="left" src={this.state.json.poster} className="image"></img>
 
-        <p className="synopsis-title"> Synopsis: </p>
+        <p className="title">{this.state.json.title} </p>
 
         <p className="synopsis">{this.state.json.synopsis} </p>
 

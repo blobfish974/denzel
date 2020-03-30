@@ -2,23 +2,6 @@
 
 > The must-watch Denzel's movies
 
-To run my programm simply run nodeamon app.js
-
-To start React App run:
-cd react-app
-npm start 
-
-
-Development information:
-
-I first modified the sandbox file to store the datas in 2 json files inside data repository when running it.
-
-At the beginning I had 2 collections (one for all movies and one for awesome ones) but one is enough!
-
-
-
-Global readme is:
-
 ![denzel](https://m.media-amazon.com/images/M/MV5BMjE5NDU2Mzc3MV5BMl5BanBnXkFtZTcwNjAwNTE5OQ@@._V1_SY1000_SX750_AL_.jpg)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

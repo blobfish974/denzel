@@ -26,8 +26,13 @@ At the beginning I had 2 collections (one for all movies and one for awesome one
 I created a mongoDB atlas database which means you can have issue requesting the API (as mongoDB atlas only give access to specified IP adresses).
 
 
-If you want commands to see some usefull commands used for developping see the commands.txt file.
+If you want commands to see some usefull commands and API queries used for developping see the commands.txt file.
 
+
+## React app screenshot
+
+
+![my_react_app](./img/my_react_app.png)
 
 ## Original readme is:
 

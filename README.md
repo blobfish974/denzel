@@ -5,11 +5,15 @@
 
 ## Launch the application
 
+### REST endpoints
+
 To launch the server and the api endpoints run 
 
 ```sh
 ❯ node app.js
 ```
+
+### REACT app
 
 Then, if you want to start the React App run:
 
@@ -18,6 +22,15 @@ Then, if you want to start the React App run:
 ❯ npm start 
 ```
 
+note: ensure that you first run the server in order to use to react app
+
+### GraphQL endpoints
+
+To launch the server and the api endpoints run 
+
+```sh
+❯ node app_graphql.js
+```
 
 
 ## Information on how i developped the app

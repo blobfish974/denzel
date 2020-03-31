@@ -137,7 +137,7 @@ app.post("/movies/:id", (request, response) => {
         }*/
         //var myquery = { "_id": new ObjectId(movie_id) };
         var myquery = { "id": movie_id };
-        var newvalues1 = { $set: {date: date_, review: review_ },  $setOnInsert: {date: date_, review: review_ }};
+        //var newvalues1 = { $set: {date: date_, review: review_ },  $setOnInsert: {date: date_, review: review_ }};
         var newvalues = { $set: {date: date_, review: review_ }};
         //collection_movie.update(myquery, data, { upsert: true } ,(error, result) => {
         collection_movie.update(myquery, newvalues, { upsert: true } ,(error, result) => {

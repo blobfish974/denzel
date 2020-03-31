@@ -3,7 +3,7 @@ const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 const cors = require('cors');
 // const sandbox = require('./server/sandbox');
-const imdb = require('./server/imdb');
+
 
 const express = require('express');
 const helmet = require('helmet');
@@ -13,7 +13,7 @@ const {PORT} = require('./server/constants');
 const CONNECTION_URL = "mongodb+srv://user:user@cluster0-mnlus.mongodb.net/test?retryWrites=true&w=majority";
 
 const DATABASE_NAME = "denzel_database";
-const METASCORE = 77;
+
 
 const app = express();
 
@@ -34,8 +34,8 @@ var database, collection;
 
 //add librairies
 const graphqlHTTP = require('express-graphql');
-const {Query} = require('./query.js');
-const {movieType} = require('./type.js');
+const {Query} = require('./graphql_files/query.js');
+const {movieType} = require('./graphql_files/type.js');
 
 const {
     GraphQLSchema,

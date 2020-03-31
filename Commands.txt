@@ -1,13 +1,7 @@
-Commands:
+MongoDB Atlas cluster settings:
 
-On mongoDB aTlas: Security -> Network access -> edit and add current IP Adress
+On mongoDB Atlas: Security -> Network access -> edit and add current IP Address
 
-To start API: 
-nodemon app.js
-
-To start React App:
-cd react-app
-npm start 
 
 // -------------------- REST -----------------------
 
@@ -33,3 +27,65 @@ add query param!
 
 curl -d '{"query": 'hello' }' -H "Content-Type: application/json" http://localhost:9292/graphql
 
+For graphql on localhost (graphiql):
+
+
+
+//return all movies
+{
+  all_movies {
+    link
+    metascore
+    synopsis
+    title
+    year
+  }
+}
+
+// Fetch a random must-watch movie
+{
+  movies {
+    link
+    metascore
+    synopsis
+    title
+    year
+  }
+}
+
+
+//Search for Denzel's movies. 
+{
+  movies_search(limit:4, metascore: 23) {
+    link
+    metascore
+    synopsis
+    title
+    year
+  }
+}
+
+//Fetch a specific movie
+{
+  movies_search_id(id:"tt2671706") {
+    id
+    link
+    metascore
+    synopsis
+    title
+    year
+  }
+}
+
+
+// Populate the database with all the movies from IMDb from actor with a specific id
+{
+  movies_populate_id(id:"nm0000243")
+}
+
+//Save a watched date and a review
+{
+  movies_review_id(movie_id:"tt2671706",date:"2025-03-04",review:"😍 🔥")
+}
+
+To check on mongoDB cluster -> {id:"tt2671706"} 

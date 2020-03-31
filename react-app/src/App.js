@@ -26,7 +26,13 @@ class App extends Component{
 
   renderMovieReview(){
     if(this.state.json.review ){
-      return  <p className="review">review: {this.state.json.review}</p>
+      if(this.state.json.date ){
+        return  <p className="review"> Review: {this.state.json.review} (on: {this.state.json.date})</p>
+      }
+      else {
+        return  <p className="review"> Review: {this.state.json.review}</p>
+      }
+      
     }
     else{
       return <p className="review"> (sorry no review available)</p>
@@ -47,7 +53,6 @@ class App extends Component{
         <p className="review"> {this.renderMovieReview()}</p>
 
         <div className="link">
-          <a>Link to IMDb:&nbsp;&nbsp;</a>
             <a href={this.state.json.link} >IMDb record</a>
         </div>
       </div>

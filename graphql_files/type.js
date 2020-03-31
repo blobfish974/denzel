@@ -9,6 +9,7 @@ const {
 movieType = new GraphQLObjectType({
     name: 'Movie',
     fields: {
+        id: { type: GraphQLString },
         link: { type: GraphQLString },
         metascore: { type: GraphQLInt },
         synopsis: { type: GraphQLString },
